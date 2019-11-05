@@ -5,6 +5,8 @@ This a very simple plugin that adds syntax highlighting to [Templaty][1] files.
 The plugin will attempt to detect when another programming language is being
 used and automatically apply the correct highlighter to the file.
 
+<img src="https://raw.githubusercontent.com/samvv/vim-templaty/master/preview.png" />
+
 ## Installation
 
 We recommend the lightweight [vim-plug][2] if you have no plugin manager yet.
