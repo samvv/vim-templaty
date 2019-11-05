@@ -7,7 +7,7 @@ used and automatically apply the correct highlighter to the file.
 
 ## Installation
 
-We recommend the lightweight [vim-plug] if you have no plugin manager yet.
+We recommend the lightweight [vim-plug][2] if you have no plugin manager yet.
 Simply add the following to your `.vimrc` or `init.vim`:
 
 ```vim
@@ -24,7 +24,7 @@ work.
 
 Currently, this plugin uses a very simple algorithm for detecting the
 underlying file type of the template. Chances are that the algorithm does not
-work for your use-case, so your best bet is to [open an issue][2] so I can take
+work for your use-case, so your best bet is to [open an issue][3] so I can take
 a look at the problem.
 
 ## License
@@ -33,4 +33,5 @@ This plugin is licensed under the relatively permissive Apache license, which sh
 let you do almost anything with it except for claiming that it is yours.
 
 [1]: https://github.com/samvv/Templaty
-[2]: https://github.com/samvv/vim-templaty/issues
+[2]: https://github.com/junegunn/vim-plug
+[3]: https://github.com/samvv/vim-templaty/issues
