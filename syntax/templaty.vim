@@ -18,7 +18,9 @@ endif
 " highlighted.
 " We have to unset b:current_syntax because otherwise the highlighter will
 " fail to load.
-unlet b:current_syntax
+if exists("b:current_syntax")
+  unlet b:current_syntax
+endif
 syntax include @PY syntax/python.vim
 
 syntax match templatyOperators contained containedin=templatyExpression,templatyStatement '\v\*'
