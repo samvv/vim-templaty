@@ -4,6 +4,7 @@ let s:known_file_extensions = {
   \ 'cpp': 'cpp',
   \ 'hpp': 'cpp',
   \ 'c': 'c',
+  \ 'h': 'c',
   \ 'py': 'python'
   \ }
 
