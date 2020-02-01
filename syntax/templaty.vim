@@ -1,18 +1,12 @@
 
-" The following does not work because for some unknown reason this variable is
-" set when we try to load a file with a secondary file extension.
-" if exists("b:current_syntax")
-"     finish
-" endif
-
 " If there was a secondary file type specified either by ftdetect or 
 " by the user, then load its highlighter.
 " Example: cpp.templaty
-let parts = split(&ft, '\.')
-if len(parts) > 1
-  let s:nested_filetype = join(parts[0:len(parts)-2], '.')
-  exec 'syntax' 'include' '@NESTED' ('syntax/' . s:nested_filetype . '.vim')
-endif
+" let parts = split(&ft, '\.')
+" if len(parts) > 1
+"   let s:nested_filetype = join(parts[0:len(parts)-2], '.')
+"   exec 'syntax' 'include' '@NESTED' ('syntax/' . s:nested_filetype . '.vim')
+" endif
 
 " Import Python syntax highlighter so that {! !}-blocks can be properly
 " highlighted.
@@ -58,16 +52,30 @@ syntax keyword templatyKeywords contained containedin=templatyStatement
   \ noindent
   \ endnoindent
 
-syntax match templatyNumber '\v<\d+>' contained containedin=templatyStatement,templatyExpression
+syntax match templatyNumber contained containedin=templatyStatement,templatyExpression '\v<\d+>'
 syntax match templatyIdentifier contained containedin=templatyStatement,templatyExpression '\v[a-zA-Z][a-zA-Z0-9]*'
 syntax match templatyPunctuation contained containedin=templatyStatement,templatyExpression '\v[()]'
 syntax keyword templatyBuiltins contained containedin=templatyStatement,templatyExpression
+  \ reversed
   \ range
   \ now
-syntax region templatyString start=/\v'/ skip=/\v\\./ end=/\v'/
+syntax region templatyString contained containedin=templatyStatement,templatyExpression start=/\v'/ skip=/\v\\./ end=/\v'/
+
 syntax region templatyExpression matchgroup=Special start='{{' end='}}'
-syntax region templatyCode matchgroup=Special start='{!' end='!}' contains=@PY
+syntax region templatyCode matchgroup=Special start='{!' end='!}'
 syntax region templatyStatement matchgroup=Special start='{%' end='%}'
+
+" The following commands contain various fixes for other syntax highlighters
+" 
+" The majority of these fixes have to do with the fact that ALLBUT and
+" CONTAINED are used to often, incorrectly adding some of the syn match
+" patterns in places where it shouldn't be.
+
+syntax cluster cPreProcGroup add=templatyNumber,templatyIdentifier,templatyBuiltins,templatyPunctuation 
+
+" Link the default syntax highlighting to the correct match rules
+" We chose not to include a templatyIdentifier as an Identifier because they
+" would be used too frequently.
 
 hi default link templatyStatement Normal
 hi default link templatyExpression Normal
